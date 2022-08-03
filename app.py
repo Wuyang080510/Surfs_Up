@@ -22,21 +22,19 @@ app = Flask(__name__)
 @app.route("/")
 # add routing information for each of the other routes
 def welcome():
+    
     return(
-        '''
-        Welcome to the Climate Analysis API!
+        """Welcome to the Climate Analysis API!<br/>"""
+        f"Available Routes:<br/>" 
         
-        Available Routes:
+        f"/api/v1.0/precipitation<br/>" 
         
-        /api/v1.0/precipitation
+        f"/api/v1.0/stations <br/>" 
         
-        /api/v1.0/stations
+        f"/api/v1.0/tobs<br/>" 
         
-        /api/v1.0/tobs
-        
-        /api/v1.0/temp/start/end
-        
-        ''')
+        f"/api/v1.0/temp/start/end"
+        )
 
 # create a new precipitation route
 @app.route("/api/v1.0/precipitation")
@@ -48,26 +46,44 @@ def precipitation():
     # create a dictionary 
     precip = {date:prcp for date, prcp in precipitation}
     return jsonify(precip)
+
 # create a new stations route
 @app.route("/api/v1.0/stations")
 # create the stations() function
 def stations():
     results = session.query(Station.station).all()
     stations = list(np.ravel(results))
-    return jsonify(stations=stations)
+    return jsonify(stations)
+
+# create a new temperature route
+@app.route("/api/v1.0/tobs")
+# create the temp_monthly() function 
+def temp_monthly():
+    prev_year = dt.date(2017, 8, 23) - dt.timedelta(days=365)
+    results = session.query(Measurement.tobs).filter(Measurement.date>=prev_year).\
+    filter(Measurement.station == 'USC00519281').all()
+    temps = list(np.ravel(results))
+    return jsonify(data=temps)
+
+# create routes for temperatures statistics
+@app.route("/api/v1.0/temp/<start>")
+@app.route("/api/v1.0/temp/<start>/<end>")
+def stats(start=None, end=None):
+    sel = [func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)]
     
-# def hello_world():
-#     return 'Hello World'
+    if not end:
+        results=session.query(*sel).\
+            filter(Measurement.date>=start).all()
+        temps = list(np.ravel(results))
+        return jsonify(temps)
+    
+    results = session.query(*sel).filter(Measurement.date >=start).filter(Measurement.date <=end).all()
+    temps = list(np.ravel(results))
 
-# # <h1> Welcome to my website </h1>
+    return jsonify(temps)
 
-# temperature = float(input("What is the temperature right now?"))
+if __name__ == "__main__":
+    app.run(debug=True)
 
-# def temp_warning(temperature):
-#     if temperature >= 90:
-#         print('High temperature warning')
-#     elif temperature < 90 and temperature >=65: 
-#         print('It is the right time to go out!')
-#     else:
-#         print('Too cold to go out!')
-# temp_warning(temperature)
+
+
