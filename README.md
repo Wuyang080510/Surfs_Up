@@ -24,14 +24,14 @@ In this analysis, I pulled all the temperature data for June and December. Two s
     * The standard deviation oF June temperatures is 3.26, which indicates 68% of temperatures in June ranges from 71.64 F to 78.16 F.
     * The standard deviation oF December temperatures is 3.75, which indicates 68% of temperatures in December ranges from 67.29 F to 74.79 F.
 
-![img_June_Temp_Hist]()  ![img_Dec_Temp_Hist]()
+![img_June_Temp_Hist](https://github.com/Wuyang080510/Surfs_Up/blob/main/image/June%20Temp%20Histogram.png)  ![img_Dec_Temp_Hist](https://github.com/Wuyang080510/Surfs_Up/blob/main/image/December%20Temp%20Histogram.png)
 
 ### Additional Tables and Graphs for Precipitation in Oahu, Hawaii
 - Precipitation level is a significant factor that determines if the investor will open a surf store in Oahu. I also queried precipitation data for June and December from the database and plotted the data with matplotlib. From the histogram graphs, most of the days in June and December don't have any precipitation. 75% of the days in June and December rained less than 0.15 inches.
 
-![img_June_prcp_Hist]()  ![img_Dec_prcp_Hist]()
+![img_June_prcp_Hist](https://github.com/Wuyang080510/Surfs_Up/blob/main/image/Hist%20June%20Pricipitation.png)  ![img_Dec_prcp_Hist](https://github.com/Wuyang080510/Surfs_Up/blob/main/image/Hist%20Dec%20Pricipitation.png)
 
-![img_June_prcp_table]()  ![img_Dec_prcp_table]()
+![img_June_prcp_table](https://github.com/Wuyang080510/Surfs_Up/blob/main/image/Precipitation%20June%20Table.png)  ![img_Dec_prcp_table](https://github.com/Wuyang080510/Surfs_Up/blob/main/image/Precipitation%20Dec%20Table.png)
 
 ## Summary
 Rain and temperature are the major concerns for the investor to invest in a Surf n' Ice Cream shop in Oahu, Hawaii. Based on the above analysis, the temperature in Oahu kept stable throughout the year. The average temperature was around 71 F to 75 F. The precipitation level kept low for most of the days. There were a couple of days with rain higher than 2 inches. The weather analysis supports opening a Surf n' Ice Cream shop on Oahu Island. 
